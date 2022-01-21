@@ -1,7 +1,7 @@
 import { User } from "../../../types";
 import { dataBase } from "../../../utils"
 
-type Payload = Omit<User, 'id'>
+type Payload = Omit<User, 'id' | 'sessionToken'>
 
 const signUp = async (payload: Payload) => {
     try {
