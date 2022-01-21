@@ -3,6 +3,7 @@ import { useAuth } from "../../../hooks";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from "./validation-schema";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 export const defaultValues = {
     email:'',
@@ -33,6 +34,7 @@ const Login: FC = () => {
     }
 
     return(
+        <>
         <form action="" onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <label htmlFor="email">Email  </label>
@@ -52,6 +54,8 @@ const Login: FC = () => {
             <button type="submit">Login</button>
             {alert}
         </form>
+        <Link to='signUp'>Sign up</Link><br />
+        </>
     )
 
 }
