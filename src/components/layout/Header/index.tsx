@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
+import { useAuth } from "../../../hooks";
 
 const Header = () => {
 
+    const { logOut } = useAuth();
+    
     return(
         <nav>
             CINEMADA<br />
@@ -10,7 +13,7 @@ const Header = () => {
             <Link to='/'>Series</Link><br />
             <Link to='/'>Users</Link><br />
             <Link to='/'>Admin</Link><br />
-            <Link to='/'>Log out</Link><br />    
+            <button onClick={logOut}>Log out</button><br />    
         </nav>
     )
 }

@@ -99,6 +99,12 @@ const useAuth = () => {
 
     };
 
-    return { login, loginWithToken, hasUserLoggedIn }
+    const logOut = () => {
+        localStorage.removeItem('share-job-token');
+        setUserSession(undefined);
+        push('/login');
+    };
+
+    return { login, loginWithToken, hasUserLoggedIn, logOut }
 }
 export { useAuth }
