@@ -2,12 +2,12 @@ import { FC } from 'react'
 import { Layout } from '../../components/layout'
 
 
-const Dashboard: FC = () => {
+const Home: FC = () => {
     return(
         <Layout>
-            <div>dash</div>
+            <div>HOME</div>
         </Layout>
     )
 }
 
-export {  Dashboard }
+export {  Home }

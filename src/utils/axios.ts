@@ -1,9 +1,9 @@
 import axios from "axios"
 
 const api = axios.create({
-    baseURL: process.env.API_MOVIES,
+    baseURL: 'https://api.themoviedb.org/3/movie/',
     params: {
-        api_key:process.env.API_KEY,
+        api_key:'b37c164521600a2fbb73ced550b75545',
     }
 });
 
