@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react'
+import { MediaCard } from '../../components/common/Card';
 import { Layout } from '../../components/layout'
 import { useItems } from '../../hooks/useItems'
 import { Movie } from '../../types';
@@ -19,7 +20,12 @@ const Admin: FC = () => {
     return(
         <Layout>
             {topRatedMovies?.map((topRatedMovie) => (
-                <div key={topRatedMovie.id}>{topRatedMovie.title}</div>
+                <MediaCard 
+                    img={'https://image.tmdb.org/t/p/w200/'+topRatedMovie.poster_path} 
+                    title={topRatedMovie.title}
+                    voteAverage={topRatedMovie.vote_average}
+                    key={topRatedMovie.id}
+                />
             ))}
         </Layout>
     )
