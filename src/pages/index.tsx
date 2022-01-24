@@ -1,3 +1,4 @@
 export { SignUp } from './SignUp'
 export { Login } from './Login'
-export { Dashboard } from './Dashboard'
+export { Home } from './Home'
+export { Admin } from './Admin'
