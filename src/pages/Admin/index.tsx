@@ -3,6 +3,7 @@ import { MediaCard } from '../../components/common/Card';
 import { Layout } from '../../components/layout'
 import { useItems } from '../../hooks/useItems'
 import { Movie } from '../../types';
+import './style.css'
 
 
 const Admin: FC = () => {
@@ -19,6 +20,7 @@ const Admin: FC = () => {
     
     return(
         <Layout>
+            <div className='cardsContainer'>
             {topRatedMovies?.map((topRatedMovie) => (
                 <MediaCard 
                     img={'https://image.tmdb.org/t/p/w200/'+topRatedMovie.poster_path} 
@@ -27,6 +29,7 @@ const Admin: FC = () => {
                     key={topRatedMovie.id}
                 />
             ))}
+            </div>
         </Layout>
     )
 }
