@@ -16,12 +16,12 @@ type Props = {
 
 const MediaCard: React.FC<Props> = ({ img, title, voteAverage }) => {
   return (
-    <Card sx={{ maxWidth: 245 }}>
+    <Card sx={{ maxWidth: 245 }} >
       <CardMedia
         component="img"
         height="400"
         image={img}
-        alt="green iguana"
+        alt="Poster"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -33,7 +33,7 @@ const MediaCard: React.FC<Props> = ({ img, title, voteAverage }) => {
         <Rating name="half-rating-read" value={voteAverage/2} precision={0.5} readOnly />
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="large" startIcon={<AddIcon />}>Add</Button>
+        <Button variant="contained" size="large" /*startIcon={<AddIcon />}*/>Add</Button>
       </CardActions>
     </Card>
   );
