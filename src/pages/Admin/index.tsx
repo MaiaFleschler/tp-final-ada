@@ -3,34 +3,43 @@ import { MediaCard } from '../../components/common/Card';
 import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
 import { useItems } from '../../hooks/useItems'
-import { Movie } from '../../types';
+import { MovieDBItem } from '../../types';
 import './style.css'
 
 
 const Admin: FC = () => {
 
-    const [topRatedMovies,setTopRatedMovies] = useState<Movie[]>();
+    const [movieDBItems,setMovieDBItems] = useState<MovieDBItem[]>();
 
-    const { getItems, getSearchedItems } = useItems();
+
+    const params = new URLSearchParams(window.location.search);
+    let query = params.get("query");
+    
+
+    const { getItems } = useItems();
 
     useEffect(() => {
         getItems().then(response => {
-            setTopRatedMovies(response)
+            setMovieDBItems(response)
         });
-      }, []);
+      }, [query]);
 
-      getSearchedItems()
+      let title: any;
     
     return(
         <Layout>
             <Searcher />
             <div className='cardsContainer'>
-            {topRatedMovies?.map((topRatedMovie) => (
-                <MediaCard 
-                    img={'https://image.tmdb.org/t/p/w200/'+topRatedMovie.poster_path} 
-                    title={topRatedMovie.title}
-                    voteAverage={topRatedMovie.vote_average}
-                    key={topRatedMovie.id}
+            {movieDBItems?.map((movieDBItem) => (
+                <MediaCard
+                    img={movieDBItem.poster_path} 
+                    {...movieDBItem.media_type===undefined || movieDBItem.media_type==='movie'
+                    ?title=movieDBItem.title
+                    :title=movieDBItem.name
+                    }
+                    title={title}
+                    voteAverage={movieDBItem.vote_average}
+                    key={movieDBItem.id}
                 />
             ))}
             </div>
