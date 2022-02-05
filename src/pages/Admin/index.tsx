@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import { MediaCard } from '../../components/common/Card';
+import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
 import { useItems } from '../../hooks/useItems'
 import { Movie } from '../../types';
@@ -10,16 +11,19 @@ const Admin: FC = () => {
 
     const [topRatedMovies,setTopRatedMovies] = useState<Movie[]>();
 
-    const { getItems } = useItems();
+    const { getItems, getSearchedItems } = useItems();
 
     useEffect(() => {
         getItems().then(response => {
             setTopRatedMovies(response)
         });
       }, []);
+
+      getSearchedItems()
     
     return(
         <Layout>
+            <Searcher />
             <div className='cardsContainer'>
             {topRatedMovies?.map((topRatedMovie) => (
                 <MediaCard 
