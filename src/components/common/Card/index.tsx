@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
-import AddIcon from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 
 type Props = {
@@ -15,12 +14,19 @@ type Props = {
 }
 
 const MediaCard: React.FC<Props> = ({ img, title, voteAverage }) => {
+  let image;
+  if(img==null){
+    image= require('./noImage.png')
+  } else {
+    image='https://image.tmdb.org/t/p/w200/'+img
+  }
+
   return (
     <Card sx={{ maxWidth: 245 }} >
       <CardMedia
         component="img"
         height="400"
-        image={img}
+        image={image}
         alt="Poster"
       />
       <CardContent>
@@ -33,7 +39,7 @@ const MediaCard: React.FC<Props> = ({ img, title, voteAverage }) => {
         <Rating name="half-rating-read" value={voteAverage/2} precision={0.5} readOnly />
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="large" /*startIcon={<AddIcon />}*/>Add</Button>
+        <Button variant="contained" size="large">Add</Button>
       </CardActions>
     </Card>
   );

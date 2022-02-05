@@ -12,7 +12,7 @@ const Header = () => {
             <Link to='/'>Movies</Link><br />
             <Link to='/'>Series</Link><br />
             <Link to='/'>Users</Link><br />
-            <Link to='admin'>Admin</Link><br />
+            <Link to='/admin'>Admin</Link><br />
             <button onClick={logOut}>Log out</button><br />    
         </nav>
     )
