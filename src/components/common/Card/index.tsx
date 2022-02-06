@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 type Props = {
   img: string,
-  title: string,
+  title: string | undefined,
   voteAverage: number
 }
 

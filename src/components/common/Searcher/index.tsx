@@ -9,7 +9,7 @@ const Searcher = () => {
 const { push } = useHistory()
 
 const handlingSearchingValue = (value: string) => {
-    push(`/admin?query=${value}`)
+    push(`/admin?query=${value}&page=1`)
 }
 
   return (
