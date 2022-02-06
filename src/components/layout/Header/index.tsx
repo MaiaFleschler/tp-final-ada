@@ -22,7 +22,6 @@ const pages = [
     {name:'Users', path:'/'}, 
     {name:'Admin', path:'/admin'}
 ];
-const settings = ['Logout'];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -89,7 +88,7 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Link to={page.path} style={{ textDecoration: 'none', color: 'white' }}>{page.name}</Link></Typography>
+                  <Typography textAlign="center"><Link to={page.path} style={{ textDecoration: 'none'}}>{page.name}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>

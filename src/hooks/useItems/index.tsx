@@ -1,21 +1,19 @@
-import { MovieDBItem } from "../../types";
+import { MovieDBItemData } from "../../types";
 import { api } from "../../utils";
 
 const useItems = () => {
-    const params = new URLSearchParams(window.location.search);
-    let query = params.get("query");
 
-    const getItems = async (): Promise<MovieDBItem[]> => {
+    const getItems = async (): Promise<MovieDBItemData> => {
+        const params = new URLSearchParams(window.location.search);
+        let query = params.get("query");
+        let page = params.get("page");
         let response;
-        let results;
         if(query=="" || query==undefined){
-            response = await api.get('/movie/top_rated');
-            results = response.data.results
+            response = await api.get(`/movie/top_rated?page=${page}`);
         } else {
-            response = await api.get(`/search/multi?query=${query}`);
-            results = (response.data.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv");
+            response = await api.get(`/search/multi?page=${page}&query=${query}`);
         }
-        return results;
+        return response.data;
     }
     return { getItems }
 }

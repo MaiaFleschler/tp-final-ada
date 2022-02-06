@@ -29,3 +29,9 @@ export type MovieDBItem = {
     name?: string,
     original_name?: string
 }
+export type MovieDBItemData = {
+    page: number,
+    results: MovieDBItem[],
+    total_pages: number,
+    total_results: number
+}
