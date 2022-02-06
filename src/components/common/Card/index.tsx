@@ -39,7 +39,7 @@ const MediaCard: React.FC<Props> = ({ img, title, voteAverage }) => {
         <Rating name="half-rating-read" value={voteAverage/2} precision={0.5} readOnly />
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="large">Add</Button>
+        <Button variant="contained" size="large" color="secondary">Add</Button>
       </CardActions>
     </Card>
   );
