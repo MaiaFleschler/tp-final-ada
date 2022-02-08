@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -6,19 +5,34 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
+import { useDataBase } from '../../../hooks';
+import { MovieDBItem } from '../../../types';
+import { FC } from 'react';
 
 type Props = {
-  img: string,
-  title: string | undefined,
-  voteAverage: number
+  movieDBItem: MovieDBItem,
 }
 
-const MediaCard: React.FC<Props> = ({ img, title, voteAverage }) => {
+const MediaCard : FC<Props> = ({ movieDBItem }) => {
+  
+  const { feedMovieDBItems } = useDataBase();
+
+  const handlingClick = () => {
+    feedMovieDBItems(movieDBItem);
+  }
+
   let image;
-  if(img==null){
+  if(movieDBItem.poster_path==null){
     image= require('./noImage.png')
   } else {
-    image='https://image.tmdb.org/t/p/w200/'+img
+    image='https://image.tmdb.org/t/p/w200/'+movieDBItem.poster_path
+  }
+
+  let title;
+  if(movieDBItem.media_type===undefined || movieDBItem.media_type==='movie'){
+    title=movieDBItem.title
+  } else {
+    title=movieDBItem.name
   }
 
   return (
@@ -34,12 +48,12 @@ const MediaCard: React.FC<Props> = ({ img, title, voteAverage }) => {
           {title}
         </Typography>
         <Typography variant="body1" color="red">
-          {voteAverage}
+          {movieDBItem.vote_average}
         </Typography>
-        <Rating name="half-rating-read" value={voteAverage/2} precision={0.5} readOnly />
+        <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="large" color="secondary">Add</Button>
+        <Button variant="contained" size="large" color="secondary" onClick={handlingClick}>Add</Button>
       </CardActions>
     </Card>
   );

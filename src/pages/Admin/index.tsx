@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { MediaCard } from '../../components/common/Card';
 import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
-import { useItems } from '../../hooks/useItems'
+import { useItems } from '../../hooks'
 import { MovieDBItem } from '../../types';
 import './style.css'
 
@@ -32,6 +32,7 @@ const Admin: FC = () => {
             items = response.results:
             items = (response.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv")
             setMovieDBItems(items);
+            console.log(items)
         });
       }, [query, page]);
       
@@ -39,8 +40,6 @@ const Admin: FC = () => {
       const handlePageChange = (event:any, value:any) => {
         setPage(value);
       }
-
-      let title: string | undefined;
     
     return(
         <Layout>
@@ -48,13 +47,7 @@ const Admin: FC = () => {
             <div className='cardsContainer'>
             {movieDBItems?.map((movieDBItem) => (
                 <MediaCard
-                    img={movieDBItem.poster_path} 
-                    {...movieDBItem.media_type===undefined || movieDBItem.media_type==='movie'
-                    ?title=movieDBItem.title
-                    :title=movieDBItem.name
-                    }
-                    title={title}
-                    voteAverage={movieDBItem.vote_average}
+                    movieDBItem = {movieDBItem}
                     key={movieDBItem.id}
                 />
             ))}
