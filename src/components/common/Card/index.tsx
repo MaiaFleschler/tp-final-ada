@@ -7,7 +7,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { useDataBase } from '../../../hooks';
 import { MovieDBItem } from '../../../types';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 type Props = {
   movieDBItem: MovieDBItem,
@@ -17,8 +17,11 @@ const MediaCard : FC<Props> = ({ movieDBItem }) => {
   
   const { feedMovieDBItems } = useDataBase();
 
+  const [textButton, setTextButton] = useState("Add")
+
   const handlingClick = () => {
     feedMovieDBItems(movieDBItem);
+    setTextButton('Delete');
   }
 
   let image;
@@ -53,7 +56,7 @@ const MediaCard : FC<Props> = ({ movieDBItem }) => {
         <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="large" color="secondary" onClick={handlingClick}>Add</Button>
+        <Button variant="contained" size="large" color="secondary" onClick={handlingClick}>{textButton}</Button>
       </CardActions>
     </Card>
   );
