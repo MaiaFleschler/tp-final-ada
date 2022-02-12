@@ -4,3 +4,15 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.pagination {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+@media only screen and (min-width: 600px) {
+    .cardsContainer {
+        width: 90%;
+        justify-content: left;
+    }
+}

@@ -1,0 +1,27 @@
+.card {
+    width: 300px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media only screen and (min-width: 600px) {
+    .card {
+        width: 23%;
+        margin-left: 11px;
+        margin-right: 11px;
+    }
+    .title {
+        height: 85px;
+    }
+    .cardImg {
+        height: 400px;
+    }
+}
