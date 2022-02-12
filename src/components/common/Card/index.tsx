@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { useDataBase } from '../../../hooks';
 import { MovieDBItem } from '../../../types';
 import { FC, useState } from 'react';
+import './style.css'
 
 type Props = {
   movieDBItem: MovieDBItem,
@@ -39,24 +40,24 @@ const MediaCard : FC<Props> = ({ movieDBItem }) => {
   }
 
   return (
-    <Card sx={{ maxWidth: 245 }} >
+    <Card className='card' >
       <CardMedia
         component="img"
-        height="400"
         image={image}
         alt="Poster"
+        className='cardImg'
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+      <CardContent className='cardContent'>
+        <Typography gutterBottom variant="h6" component="div" className='title'>
           {title}
         </Typography>
-        <Typography variant="body1" color="red">
+        <Typography variant="h6" color="#e6ab07">
           {movieDBItem.vote_average}
         </Typography>
         <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="large" color="secondary" onClick={handlingClick}>{textButton}</Button>
+        <Button variant="outlined" size="large" color="primary" onClick={handlingClick}>{textButton}</Button>
       </CardActions>
     </Card>
   );

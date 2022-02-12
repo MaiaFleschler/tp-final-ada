@@ -45,7 +45,7 @@ const Header = () => {
   const { logOut } = useAuth();
 
   return (
-    <AppBar position="static" color="secondary">
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -53,6 +53,7 @@ const Header = () => {
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            color='secondary'
           >
             CINEMADA
           </Typography>
@@ -64,7 +65,7 @@ const Header = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="secondary"
             >
               <MenuIcon />
             </IconButton>
@@ -87,8 +88,8 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Link to={page.path} style={{ textDecoration: 'none'}}>{page.name}</Link></Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu} style={{ backgroundColor: '#18B7BE' }}>
+                  <Typography textAlign="center"><Link to={page.path} style={{ textDecoration: 'none', color: '#FCD752' }}>{page.name}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -98,6 +99,7 @@ const Header = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            color='secondary'
           >
             CINEMADA
           </Typography>
@@ -106,10 +108,10 @@ const Header = () => {
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: '#FCD752', display: 'block' }}
               >
                 
-                <Link to={page.path} style={{ textDecoration: 'none', color: 'white'  }}>{page.name}</Link>
+                <Link to={page.path} style={{ textDecoration: 'none', color: '#FCD752'  }}>{page.name}</Link>
               </Button>
             ))}
           </Box>
