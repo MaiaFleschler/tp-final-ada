@@ -5,13 +5,24 @@ const useDataBase = () => {
 
     const feedMovieDBItems = async (payload: MovieDBItem) => {
     try {
-        const response = await dataBase.post('/movie_db_items.json', payload);
-        console.log(response);
+        await dataBase.post('/movie_db_items.json', payload);
     } catch(err){
         console.log(err);
     }
     }
+    const getMovieDBItemsIds = async () => {
+        const movieDBItemsIds:number[] = [];
+        try {
+            const response = await dataBase.get('/movie_db_items.json');
+            Object.keys(response.data).map(function(key, index){
+                movieDBItemsIds.push(response.data[key].id);
+            })
+            return movieDBItemsIds;
+        } catch(err){
+            console.log(err);
+        }
+        }
 
-    return { feedMovieDBItems }
+    return { feedMovieDBItems, getMovieDBItemsIds }
 }
 export { useDataBase }

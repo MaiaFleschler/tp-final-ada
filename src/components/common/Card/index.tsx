@@ -7,7 +7,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { useDataBase } from '../../../hooks';
 import { MovieDBItem } from '../../../types';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import './style.css'
 
 type Props = {
@@ -16,14 +16,23 @@ type Props = {
 
 const MediaCard : FC<Props> = ({ movieDBItem }) => {
   
-  const { feedMovieDBItems } = useDataBase();
+  const { feedMovieDBItems, getMovieDBItemsIds } = useDataBase();
 
   const [textButton, setTextButton] = useState("Add")
+  const [movieDBItemsIds, setMovieDBItemsIds] = useState<number[]>()
 
-  const handlingClick = () => {
-    feedMovieDBItems(movieDBItem);
+  const handlingClick = async () => {
+    if(movieDBItem.media_type===undefined){
+      movieDBItem.media_type = "movie";
+    }
+    await feedMovieDBItems(movieDBItem);
+    setMovieDBItemsIds(await getMovieDBItemsIds());
+    // console.log(movieDBItemsIds);
     setTextButton('Delete');
   }
+  
+  console.log(movieDBItemsIds);
+
 
   let image;
   if(movieDBItem.poster_path==null){
@@ -51,7 +60,7 @@ const MediaCard : FC<Props> = ({ movieDBItem }) => {
         <Typography gutterBottom variant="h6" component="div" className='title'>
           {title}
         </Typography>
-        <Typography variant="h6" color="#e6ab07">
+        <Typography variant="h6" color="#B39BC8">
           {movieDBItem.vote_average}
         </Typography>
         <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />

@@ -9,9 +9,11 @@ import { MovieDBItem } from '../../types';
 import './style.css'
 
 const Admin: FC = () => {
-    const [page, setPage] = useState<number>(1);
+    
     const params = new URLSearchParams(window.location.search);
     let query = params.get("query");
+    
+    const [page, setPage] = useState<number>(Number(params.get("page")) || 1);
 
     const { push } = useHistory()
     useEffect(() => {
@@ -28,11 +30,10 @@ const Admin: FC = () => {
             setTotalPages(response.total_pages);
             //Filter not showing people from multi/search
             let items;
-            query=="" || query==undefined?
+            query==="" || query===undefined?
             items = response.results:
             items = (response.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv")
             setMovieDBItems(items);
-            console.log(items)
         });
       }, [query, page]);
       

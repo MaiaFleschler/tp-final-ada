@@ -88,8 +88,8 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu} style={{ backgroundColor: '#18B7BE' }}>
-                  <Typography textAlign="center"><Link to={page.path} style={{ textDecoration: 'none', color: '#FCD752' }}>{page.name}</Link></Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu} style={{ backgroundColor: '#A1C3D1' }}>
+                  <Typography textAlign="center"><Link to={page.path} style={{ textDecoration: 'none', color: '#F0EBF4' }}>{page.name}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -111,7 +111,7 @@ const Header = () => {
                 sx={{ my: 2, color: '#FCD752', display: 'block' }}
               >
                 
-                <Link to={page.path} style={{ textDecoration: 'none', color: '#FCD752'  }}>{page.name}</Link>
+                <Link to={page.path} style={{ textDecoration: 'none', color: '#F0EBF4'  }}>{page.name}</Link>
               </Button>
             ))}
           </Box>
