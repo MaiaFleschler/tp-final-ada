@@ -4,7 +4,7 @@ import { dataBase } from "../../utils";
 
 const useDataBase = () => {
 
-    const [movieDBItemsIds, setMovieDBItemsIds] = useState<string[]>()
+    const [movieDBItemsIds, setMovieDBItemsIds] = useState<{ apiID: number; dbId: string; }[]>([])
 
     const feedMovieDBItems = async (payload: MovieDBItem) => {
     try {
@@ -16,12 +16,12 @@ const useDataBase = () => {
 
 
     const getMovieDBItemsIds = async () => {
-        const movieDBItemsIdsArray:string[]= [];
+        const movieDBItemsIdsArray:{ apiID: number; dbId: string; }[]= [];
         try {
             const response = await dataBase.get('/movie_db_items.json');
             Object.keys(response.data).map(key =>
-                movieDBItemsIdsArray.push(String(response.data[key].id)))
-            setMovieDBItemsIds(movieDBItemsIdsArray);
+                movieDBItemsIdsArray.push({apiID: response.data[key].id, dbId: key} ))
+                setMovieDBItemsIds(movieDBItemsIdsArray);
         } catch(err){
             console.log(err);
         }
@@ -31,6 +31,14 @@ const useDataBase = () => {
         getMovieDBItemsIds()
     },[])
 
-    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds }
+    const removeDBItem = async (id:string) => {
+        try {
+            await dataBase.delete(`/movie_db_items/${id}.json`);
+        } catch(err){
+            console.log(err);
+        }
+        }
+
+    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem }
 }
 export { useDataBase }
