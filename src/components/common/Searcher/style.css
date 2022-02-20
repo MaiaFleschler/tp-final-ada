@@ -1,0 +1,11 @@
+.searcher {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+    .searcher {
+        width: 85%;
+    }
+}

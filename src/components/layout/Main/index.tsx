@@ -1,8 +1,9 @@
 import { FC } from "react"
+import './style.css'
 
 const Main: FC = ({children}) => {
     return(
-        <main>
+        <main className="main">
             {children}
         </main>
     )

@@ -4,31 +4,33 @@ import { useHistory } from 'react-router-dom';
 import { MediaCard } from '../../components/common/Card';
 import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
-import { useItems } from '../../hooks/useItems'
+import { useDataBase, useItems } from '../../hooks'
 import { MovieDBItem } from '../../types';
 import './style.css'
 
 const Admin: FC = () => {
-    const [page, setPage] = useState<number>(1);
+    
     const params = new URLSearchParams(window.location.search);
     let query = params.get("query");
+    
+    const [page, setPage] = useState<number>(Number(params.get("page")) || 1);
+    const [movieDBItems,setMovieDBItems] = useState<MovieDBItem[]>();
+    const [totalPages, setTotalPages] = useState<number>();
+
+    const { movieDBItemsIds, feedMovieDBItems, getMovieDBItemsIds } = useDataBase();
+    const { getItems } = useItems();
 
     const { push } = useHistory()
     useEffect(() => {
         push(`/admin?query=${query==null?query="":query}&page=${page}`)
       }, [page]);
 
-    const [movieDBItems,setMovieDBItems] = useState<MovieDBItem[]>();
-
-    const { getItems } = useItems();
-    const [totalPages, setTotalPages] = useState<number>();
-
     useEffect(() => {
             getItems().then(response => {
             setTotalPages(response.total_pages);
             //Filter not showing people from multi/search
             let items;
-            query=="" || query==undefined?
+            query==="" || query===undefined?
             items = response.results:
             items = (response.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv")
             setMovieDBItems(items);
@@ -39,8 +41,6 @@ const Admin: FC = () => {
       const handlePageChange = (event:any, value:any) => {
         setPage(value);
       }
-
-      let title: string | undefined;
     
     return(
         <Layout>
@@ -48,18 +48,17 @@ const Admin: FC = () => {
             <div className='cardsContainer'>
             {movieDBItems?.map((movieDBItem) => (
                 <MediaCard
-                    img={movieDBItem.poster_path} 
-                    {...movieDBItem.media_type===undefined || movieDBItem.media_type==='movie'
-                    ?title=movieDBItem.title
-                    :title=movieDBItem.name
-                    }
-                    title={title}
-                    voteAverage={movieDBItem.vote_average}
+                    movieDBItem = {movieDBItem}
                     key={movieDBItem.id}
+                    feedMovieDBItems={feedMovieDBItems}
+                    getMovieDBItemsIds={getMovieDBItemsIds}
+                    isIntoDB={
+                      movieDBItemsIds?.includes(String(movieDBItem.id))
+                    }
                 />
             ))}
             </div>
-            <Pagination count={totalPages} page={page} onChange={handlePageChange} variant="outlined" defaultPage={1} boundaryCount={0} showFirstButton showLastButton />
+            <Pagination count={totalPages} page={page} onChange={handlePageChange} variant="outlined" defaultPage={1} boundaryCount={0} showFirstButton showLastButton className='pagination' color='primary'/>
         </Layout>
     )
 }
