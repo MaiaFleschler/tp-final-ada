@@ -13,19 +13,27 @@ type Props = {
   movieDBItem: MovieDBItem,
   feedMovieDBItems: (movie:MovieDBItem)=>void,
   getMovieDBItemsIds: ()=>void,
-  isIntoDB?: boolean
+  isIntoDB?: boolean,
+  removeDBItem: (id:string)=>void,
+  movieDBItemsIds: { apiID: number; dbId: string; }[]
 }
 
-const MediaCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsIds, isIntoDB }) => {
+const MediaCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsIds, isIntoDB, removeDBItem, movieDBItemsIds }) => {
 
   const [buttonText, setButtonText] = useState<string>();
 
   const handlingClick = async () => {
-    if(movieDBItem.media_type===undefined){
-      movieDBItem.media_type = "movie";
+    if(!isIntoDB){
+      if(movieDBItem.media_type===undefined){
+        movieDBItem.media_type = "movie";
+      }
+      await feedMovieDBItems(movieDBItem);
+      getMovieDBItemsIds();
+    } else {
+      let item = movieDBItemsIds.filter(e => e.apiID === movieDBItem.id)
+      removeDBItem(item[0].dbId)
+      setButtonText('Add')
     }
-    await feedMovieDBItems(movieDBItem);
-    getMovieDBItemsIds();
   }
   
   useEffect(()=>{

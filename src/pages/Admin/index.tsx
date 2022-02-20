@@ -17,7 +17,7 @@ const Admin: FC = () => {
     const [movieDBItems,setMovieDBItems] = useState<MovieDBItem[]>();
     const [totalPages, setTotalPages] = useState<number>();
 
-    const { movieDBItemsIds, feedMovieDBItems, getMovieDBItemsIds } = useDataBase();
+    const { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem } = useDataBase();
     const { getItems } = useItems();
 
     const { push } = useHistory()
@@ -53,8 +53,10 @@ const Admin: FC = () => {
                     feedMovieDBItems={feedMovieDBItems}
                     getMovieDBItemsIds={getMovieDBItemsIds}
                     isIntoDB={
-                      movieDBItemsIds?.includes(String(movieDBItem.id))
+                      movieDBItemsIds.some(e => e.apiID === movieDBItem.id)
                     }
+                    removeDBItem={removeDBItem}
+                    movieDBItemsIds={movieDBItemsIds}
                 />
             ))}
             </div>
