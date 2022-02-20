@@ -5,34 +5,32 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import { useDataBase } from '../../../hooks';
 import { MovieDBItem } from '../../../types';
 import { FC, useEffect, useState } from 'react';
 import './style.css'
 
 type Props = {
   movieDBItem: MovieDBItem,
+  feedMovieDBItems: (movie:MovieDBItem)=>void,
+  getMovieDBItemsIds: ()=>void,
+  isIntoDB?: boolean
 }
 
-const MediaCard : FC<Props> = ({ movieDBItem }) => {
-  
-  const { feedMovieDBItems, getMovieDBItemsIds } = useDataBase();
+const MediaCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsIds, isIntoDB }) => {
 
-  const [textButton, setTextButton] = useState("Add")
-  const [movieDBItemsIds, setMovieDBItemsIds] = useState<number[]>()
+  const [buttonText, setButtonText] = useState<string>();
 
   const handlingClick = async () => {
     if(movieDBItem.media_type===undefined){
       movieDBItem.media_type = "movie";
     }
     await feedMovieDBItems(movieDBItem);
-    setMovieDBItemsIds(await getMovieDBItemsIds());
-    // console.log(movieDBItemsIds);
-    setTextButton('Delete');
+    getMovieDBItemsIds();
   }
   
-  console.log(movieDBItemsIds);
-
+  useEffect(()=>{
+    isIntoDB?setButtonText('Remove'):setButtonText('Add');
+  },[isIntoDB])
 
   let image;
   if(movieDBItem.poster_path==null){
@@ -66,7 +64,7 @@ const MediaCard : FC<Props> = ({ movieDBItem }) => {
         <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
       </CardContent>
       <CardActions>
-        <Button variant="outlined" size="large" color="primary" onClick={handlingClick}>{textButton}</Button>
+        <Button variant="outlined" size="large" color="primary" onClick={handlingClick}>{buttonText}</Button>
       </CardActions>
     </Card>
   );

@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import { MovieDBItem } from "../../types";
 import { dataBase } from "../../utils";
 
 const useDataBase = () => {
+
+    const [movieDBItemsIds, setMovieDBItemsIds] = useState<string[]>()
 
     const feedMovieDBItems = async (payload: MovieDBItem) => {
     try {
@@ -10,19 +13,24 @@ const useDataBase = () => {
         console.log(err);
     }
     }
+
+
     const getMovieDBItemsIds = async () => {
-        const movieDBItemsIds:number[] = [];
+        const movieDBItemsIdsArray:string[]= [];
         try {
             const response = await dataBase.get('/movie_db_items.json');
-            Object.keys(response.data).map(function(key, index){
-                movieDBItemsIds.push(response.data[key].id);
-            })
-            return movieDBItemsIds;
+            Object.keys(response.data).map(key =>
+                movieDBItemsIdsArray.push(String(response.data[key].id)))
+            setMovieDBItemsIds(movieDBItemsIdsArray);
         } catch(err){
             console.log(err);
         }
-        }
+    }
 
-    return { feedMovieDBItems, getMovieDBItemsIds }
+    useEffect(()=>{
+        getMovieDBItemsIds()
+    },[])
+
+    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds }
 }
 export { useDataBase }

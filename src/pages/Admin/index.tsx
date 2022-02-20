@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { MediaCard } from '../../components/common/Card';
 import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
-import { useItems } from '../../hooks'
+import { useDataBase, useItems } from '../../hooks'
 import { MovieDBItem } from '../../types';
 import './style.css'
 
@@ -14,16 +14,16 @@ const Admin: FC = () => {
     let query = params.get("query");
     
     const [page, setPage] = useState<number>(Number(params.get("page")) || 1);
+    const [movieDBItems,setMovieDBItems] = useState<MovieDBItem[]>();
+    const [totalPages, setTotalPages] = useState<number>();
+
+    const { movieDBItemsIds, feedMovieDBItems, getMovieDBItemsIds } = useDataBase();
+    const { getItems } = useItems();
 
     const { push } = useHistory()
     useEffect(() => {
         push(`/admin?query=${query==null?query="":query}&page=${page}`)
       }, [page]);
-
-    const [movieDBItems,setMovieDBItems] = useState<MovieDBItem[]>();
-
-    const { getItems } = useItems();
-    const [totalPages, setTotalPages] = useState<number>();
 
     useEffect(() => {
             getItems().then(response => {
@@ -50,6 +50,11 @@ const Admin: FC = () => {
                 <MediaCard
                     movieDBItem = {movieDBItem}
                     key={movieDBItem.id}
+                    feedMovieDBItems={feedMovieDBItems}
+                    getMovieDBItemsIds={getMovieDBItemsIds}
+                    isIntoDB={
+                      movieDBItemsIds?.includes(String(movieDBItem.id))
+                    }
                 />
             ))}
             </div>
