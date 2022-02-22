@@ -17,7 +17,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const pages = [
     {name:'Home', path:'/'},
-    {name:'Movies', path:'/'}, 
+    {name:'Movies', path:'movies'}, 
     {name:'Series', path:'/'}, 
     {name:'Users', path:'/'}, 
     {name:'Admin', path:'/admin'}
