@@ -1,7 +1,7 @@
 import { Pagination } from '@mui/material';
 import { FC, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { MediaCard } from '../../components/common/Card';
+import { AdminCard } from '../../components/common/AdminCard';
 import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
 import { useDataBase, useItems } from '../../hooks'
@@ -47,7 +47,7 @@ const Admin: FC = () => {
             <Searcher />
             <div className='cardsContainer'>
             {movieDBItems?.map((movieDBItem) => (
-                <MediaCard
+                <AdminCard
                     movieDBItem = {movieDBItem}
                     key={movieDBItem.id}
                     feedMovieDBItems={feedMovieDBItems}

@@ -7,11 +7,11 @@ const useDataBase = () => {
     const [movieDBItemsIds, setMovieDBItemsIds] = useState<{ apiID: number; dbId: string; }[]>([])
 
     const feedMovieDBItems = async (payload: MovieDBItem) => {
-    try {
-        await dataBase.post('/movie_db_items.json', payload);
-    } catch(err){
-        console.log(err);
-    }
+        try {
+            await dataBase.post('/movie_db_items.json', payload);
+        } catch(err){
+            console.log(err);
+        }
     }
 
 
@@ -37,8 +37,23 @@ const useDataBase = () => {
         } catch(err){
             console.log(err);
         }
-        }
+    }
 
-    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem }
+    const getDBItems = async () => {
+        try {
+            const response = await dataBase.get('/movie_db_items.json');
+            const array = [];
+            for (const elem in response.data) {
+                array.push({
+                    ...response.data[elem]
+                })
+            }
+            return array;
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem, getDBItems }
 }
 export { useDataBase }

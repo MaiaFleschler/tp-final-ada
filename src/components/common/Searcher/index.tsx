@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import { useHistory } from 'react-router-dom';
 import './style.css'
+import { queryAllByAltText } from '@testing-library/react';
 
 const Searcher = () => {
 
@@ -10,6 +11,9 @@ const { push } = useHistory()
 
 const handlingSearchingValue = (value: string) => {
     push(`/admin?query=${value}&page=1`)
+
+const params = new URLSearchParams(window.location.search);
+let query = params.get("query");
 }
 
   return (
