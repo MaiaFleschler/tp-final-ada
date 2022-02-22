@@ -65,7 +65,21 @@ const useDataBase = () => {
             console.log(err);
         }
     }
+    const getDBSeries = async () => {
+        try {
+            const response = await dataBase.get('/movie_db_items.json');
+            const array = [];
+            for (const elem in response.data) {
+                if(response.data[elem].media_type === 'tv') {
+                    array.push(response.data[elem])
+                }
+            }
+            return array;
+        } catch(err){
+            console.log(err);
+        }
+    }
 
-    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem, getDBItems, getDBMovies }
+    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem, getDBItems, getDBMovies, getDBSeries }
 }
 export { useDataBase }
