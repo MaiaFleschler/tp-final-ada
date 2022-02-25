@@ -7,6 +7,8 @@ import { MovieDBItem } from '../../types';
 
 
 const Movies: FC = () => {
+    const { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem } = useDataBase();
+
     const { getDBMovies } = useDataBase();
     const [dbMovies, setDbMovies] = useState<MovieDBItem[]>();
 
@@ -15,7 +17,7 @@ const Movies: FC = () => {
         getDBMovies().then(response => {
             setDbMovies(response);
         });
-    }, []);
+    }, [movieDBItemsIds]);
 
 
     return(
@@ -25,13 +27,11 @@ const Movies: FC = () => {
                 <ItemCard
                     movieDBItem={dbMovie}
                     key={dbMovie.id} 
-                    feedMovieDBItems={function (movie: MovieDBItem): void {
-                        throw new Error('Function not implemented.');
-                    } } getMovieDBItemsIds={function (): void {
-                        throw new Error('Function not implemented.');
-                    } } isIntoDB={false} removeDBItem={function (id: string): void {
-                        throw new Error('Function not implemented.');
-                    } } movieDBItemsIds={[]}
+                    feedMovieDBItems={feedMovieDBItems}
+                    getMovieDBItemsIds={getMovieDBItemsIds}
+                    isIntoDB={true}
+                    removeDBItem={removeDBItem}
+                    movieDBItemsIds={movieDBItemsIds}
                 />
             ))}
             </div>
