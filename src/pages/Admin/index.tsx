@@ -1,7 +1,7 @@
 import { Pagination } from '@mui/material';
 import { FC, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { AdminCard } from '../../components/common/AdminCard';
+import { ItemCard } from '../../components/common/Card';
 import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
 import { useDataBase, useItems } from '../../hooks'
@@ -35,7 +35,7 @@ const Admin: FC = () => {
             items = (response.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv")
             setMovieDBItems(items);
         });
-      }, [query, page]);
+      }, [query, page, getItems]);
       
       
       const handlePageChange = (event:any, value:any) => {
@@ -47,7 +47,7 @@ const Admin: FC = () => {
             <Searcher />
             <div className='cardsContainer'>
             {movieDBItems?.map((movieDBItem) => (
-                <AdminCard
+                <ItemCard
                     movieDBItem = {movieDBItem}
                     key={movieDBItem.id}
                     feedMovieDBItems={feedMovieDBItems}

@@ -1,14 +1,117 @@
-.login-box {
+.loginFormContainer {
+    background-color: #8db8ca;
     width: 90%;
-    background-color: aqua;
-    /* display: flex;
+    height: 350px;
+    margin-bottom: 60%;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: center; */
-    
+    margin-top: 100px;
 }
 
-@media only screen and (min-width: 600px) {
-    .login-box {
-        width: 50%;
+.signUpFormContainer {
+    background-color: #8db8ca;
+    width: 90%;
+    height: 500px;
+    margin-bottom: 60%;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.userForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formTitle {
+    color: #E64398;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.inputForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 20px;
+}
+
+.inputBirthdate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 20px;
+}
+.submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #E64398, #e279af);
+    border: 0;
+    padding: 10px 40px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    margin-top: 30px;
+}
+
+.signUp-login {
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+@media (min-width: 600px) {
+    .loginFormContainer {
+        width: 400px;
+        height: 400px;
+    }
+    .signUpFormContainer{
+        width: 400px;
+        height: 500px;
+        margin-top: 20px;
+    }
+    .inputForm{
+        width: 300px;
+    }
+    .inputBirthdate {
+        width: 300px;
     }
 }

@@ -38,51 +38,50 @@ const SignUp: FC = () => {
 
     return(
         <>
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
+        <div className="signUpFormContainer">
+        <p className="formTitle">SignUp</p>
+        <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <label htmlFor="name">Name  </label>
-                <input type="text" 
+                <input type="text" className="inputForm" placeholder="Name"
                 {...register('name')}
                 />
                 {errors.name?.message}
                 
             </div>
             <div>
-                <label htmlFor="lastName">Last name  </label>
-                <input type="text" 
+                <input type="text" className="inputForm" placeholder="Lastname"
                 {...register('lastName')}
                 />
                 {errors.lastName?.message}
                 
             </div>
             <div>
-                <label htmlFor="birthdate">Birthdate  </label>
-                <input type="date" 
-                {...register('birthdate')}
-                />
-                {errors.birthdate?.message}
-                
-            </div>
-            <div>
-                <label htmlFor="email">Email  </label>
-                <input type="text" 
+                <input type="text" className="inputForm" placeholder="Email"
                 {...register('email')}
                 />
                 {errors.email?.message}
                 
             </div>
             <div>
-                <label htmlFor="password">Contraseña  </label>
-                <input type="password" 
+                <input type="password" className="inputForm" placeholder="Password"
                 {...register('password')}
                 />
                 {errors.password?.message}
             </div>
-            <button type="submit">Sign Up</button>
+            <div>
+                <input type="date" className="inputBirthdate" placeholder="Before"
+                {...register('birthdate')}
+                />
+                
+                {errors.birthdate?.message}
+                
+            </div>
+            <button type="submit" className="submit">Sign Up</button>
             {alert}
         </form>
-        <Link to='login'>Login</Link><br />
-        </>
+        <Link to='login' className="signUp-login">Login</Link><br />
+        </div>
+    </>
     )
 }
 

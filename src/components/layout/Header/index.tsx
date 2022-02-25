@@ -20,7 +20,7 @@ const pages = [
     {name:'Movies', path:'movies'}, 
     {name:'Series', path:'series'}, 
     {name:'Users', path:'/'}, 
-    {name:'Admin', path:'/admin'}
+    {name:'Admin', path:'/admin?query=&page=1'}
 ];
 
 const Header = () => {

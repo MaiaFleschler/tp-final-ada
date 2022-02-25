@@ -36,27 +36,26 @@ const Login: FC = () => {
 
     return(
         <>
-        <div className="login-box">
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
+        <div className="loginFormContainer">
+        <p className="formTitle">Login</p>
+        <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <label htmlFor="email">Email  </label>
-                <input type="text" 
+                <input type="text" className="inputForm" placeholder="Email"
                 {...register('email')}
                 />
                 {errors.email?.message}
                 
             </div>
             <div>
-                <label htmlFor="password">Contraseña  </label>
-                <input type="password" 
+                <input type="password" className="inputForm" placeholder="Password"
                 {...register('password')}
                 />
                 {errors.password?.message}
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" className="submit">Login</button>
             {alert}
         </form>
-        <Link to='signUp'>Sign up</Link><br />
+        <Link to='signUp' className="signUp-login">Sign up</Link><br />
         </div>
         </>
     )

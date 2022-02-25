@@ -18,16 +18,14 @@ type Props = {
   movieDBItemsIds: { apiID: number; dbId: string; }[]
 }
 
-const AdminCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsIds, isIntoDB, removeDBItem, movieDBItemsIds }) => {
+const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsIds, isIntoDB, removeDBItem, movieDBItemsIds }) => {
 
   const [buttonText, setButtonText] = useState<string>();
+  const [title, setTitle] = useState<string>();
+  const [image, setImage] = useState<string>();
 
   const handlingClick = async () => {
-    if (window.location.pathname==='/admin'){
       if(!isIntoDB){
-        if(movieDBItem.media_type===undefined){
-          movieDBItem.media_type = "movie";
-        }
         await feedMovieDBItems(movieDBItem);
         getMovieDBItemsIds();
       } else {
@@ -37,25 +35,36 @@ const AdminCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsI
         setButtonText('Add');
       }
     }
-  }
-  
+    
   useEffect(()=>{
     isIntoDB?setButtonText('Remove'):setButtonText('Add');
   },[isIntoDB])
 
-  let image;
-  if(movieDBItem.poster_path==null){
-    image= require('./noImage.png')
-  } else {
-    image='https://image.tmdb.org/t/p/w200/'+movieDBItem.poster_path
-  }
 
-  let title;
-  if(movieDBItem.media_type===undefined || movieDBItem.media_type==='movie'){
-    title=movieDBItem.title
-  } else {
-    title=movieDBItem.name
-  }
+  useEffect(()=>{
+
+    if(movieDBItem.media_type===undefined){
+      movieDBItem.media_type = "movie";
+    }
+    
+    if(movieDBItem.poster_path==null){
+      setImage(require('./noImage.png'))
+    } else {
+      setImage('https://image.tmdb.org/t/p/w200/'+movieDBItem.poster_path)
+    }
+
+    let title;
+    if(movieDBItem.media_type==='movie'){
+      title = movieDBItem.title;
+    } else { //tv
+      title = movieDBItem.name;
+    }
+    if(typeof(title)=='string' && title){
+      if(title.length > 45) title = (title.substring(0, 45))+"...";
+      setTitle(title);
+    }
+  },[])
+
 
   return (
     <Card className='card' >
@@ -81,4 +90,4 @@ const AdminCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsI
   );
 }
 
-export { AdminCard }
+export { ItemCard }
