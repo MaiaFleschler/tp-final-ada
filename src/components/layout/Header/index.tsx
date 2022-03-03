@@ -19,7 +19,7 @@ const pages = [
     {name:'Home', path:'/'},
     {name:'Movies', path:'movies'}, 
     {name:'Series', path:'series'}, 
-    {name:'Users', path:'/'}, 
+    {name:'Users', path:'/users'}, 
     {name:'Admin', path:'/admin?query=&page=1'}
 ];
 

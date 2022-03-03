@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MovieDBItem } from "../../types";
+import { MovieDBItem, User } from "../../types";
 import { dataBase } from "../../utils";
 
 const useDataBase = () => {

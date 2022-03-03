@@ -60,7 +60,7 @@ const Admin: FC = () => {
                 />
             ))}
             </div>
-            <Pagination count={totalPages} page={page} onChange={handlePageChange} variant="outlined" defaultPage={1} boundaryCount={0} showFirstButton showLastButton className='pagination' color='primary'/>
+            <Pagination count={totalPages} page={Number(params.get("page"))} onChange={handlePageChange} variant="outlined" defaultPage={1} boundaryCount={0} showFirstButton showLastButton className='pagination' color='primary'/>
         </Layout>
     )
 }

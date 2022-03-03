@@ -5,7 +5,8 @@ export type User = {
     birthdate: string,
     email: string,
     password: string,
-    sessionToken: string
+    sessionToken: string,
+    role: string
 }
 
 export type MovieDBItem = {

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../../hooks";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from "./validation-schema";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import './style.css'
 
@@ -15,6 +15,7 @@ const Login: FC = () => {
 
 
     const { login } = useAuth();
+    const [error, setError] = useState('');
 
 
     const {
@@ -30,12 +31,13 @@ const Login: FC = () => {
         try{
             await login(data.email, data.password);
         } catch(err){
-            console.log(err)
+            setError(String(err))
         }
     }
 
     return(
         <>
+        <div className="formContainer">
         <div className="loginFormContainer">
         <p className="formTitle">Login</p>
         <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
@@ -52,10 +54,12 @@ const Login: FC = () => {
                 />
                 {errors.password?.message}
             </div>
+            <div>{error}</div>
             <button type="submit" className="submit">Login</button>
             {alert}
         </form>
         <Link to='signUp' className="signUp-login">Sign up</Link><br />
+        </div>
         </div>
         </>
     )
