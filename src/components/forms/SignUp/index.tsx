@@ -1,9 +1,9 @@
-import { signUp } from "./api";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from "./validation-schema";
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useUsers } from "../../../hooks";
 
 const defaultValues = {
     name: '',
@@ -14,8 +14,10 @@ const defaultValues = {
     sessionToken: ''
 }
 
-
 const SignUp: FC = () => {
+
+    const { signUp } = useUsers();
+    const { push } = useHistory()
 
     const {
         register,
@@ -29,7 +31,8 @@ const SignUp: FC = () => {
     
     const onSubmit = async (data: { name: string; lastName: string; birthdate: string; email: string; password: string }) => {
         try{
-            await signUp({ name: data.name, lastName: data.lastName, birthdate: data.birthdate, email: data.email, password: data.password })
+            await signUp({ name: data.name, lastName: data.lastName, birthdate: data.birthdate, email: data.email, password: data.password, role: 'user' })
+            push("/login");
         } catch(err){
             console.log(err)
         }
@@ -38,6 +41,7 @@ const SignUp: FC = () => {
 
     return(
         <>
+        <div className="formContainer">
         <div className="signUpFormContainer">
         <p className="formTitle">SignUp</p>
         <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
@@ -80,6 +84,7 @@ const SignUp: FC = () => {
             {alert}
         </form>
         <Link to='login' className="signUp-login">Login</Link><br />
+        </div>
         </div>
     </>
     )

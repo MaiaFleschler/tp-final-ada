@@ -29,8 +29,8 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
         await feedMovieDBItems(movieDBItem);
         getMovieDBItemsIds();
       } else {
-        let item = movieDBItemsIds.filter(e => e.apiID === movieDBItem.id)
-        removeDBItem(item[0].dbId)
+        let item = movieDBItemsIds.find(e => e.apiID === movieDBItem.id)
+        item && removeDBItem(item.dbId)
         getMovieDBItemsIds();
         setButtonText('Add');
       }
@@ -59,11 +59,11 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
     } else { //tv
       title = movieDBItem.name;
     }
-    if(typeof(title)=='string' && title){
+    if(title){
       if(title.length > 45) title = (title.substring(0, 45))+"...";
       setTitle(title);
     }
-  },[])
+  },[movieDBItem])
 
 
   return (

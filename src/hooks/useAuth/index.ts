@@ -44,6 +44,7 @@ const useAuth = () => {
     const login = async (email: string, password: string) => {
         try {
             const response = await dataBase.get('/users.json');
+            if(!response.data) throw new Error('No se pudo conectar a la base de datos')
   
             const users: User[] = mapToArray(response.data);
     
@@ -69,7 +70,7 @@ const useAuth = () => {
             }
     
         } catch(err){
-            console.log(err);
+            throw String(err)
         }
         
     }

@@ -7,20 +7,21 @@ import { queryAllByAltText } from '@testing-library/react';
 
 const Searcher = () => {
 
-const { push } = useHistory()
+  const { push } = useHistory()
 
-const handlingSearchingValue = (value: string) => {
-    push(`/admin?query=${value}&page=1`)
+  const handlingSearchingValue = (value: string) => {
+      push(`/admin?query=${value}&page=1`)
+  }
 
-const params = new URLSearchParams(window.location.search);
-let query = params.get("query");
-}
+  const params = new URLSearchParams(window.location.search);
+  let query = params.get("query");
 
   return (
     <Box className='searcher'>
       <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
         <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} fontSize="large" />
         <TextField fullWidth 
+        defaultValue={query || ''}
         id="searcher" 
         label="Search anything you want" 
         variant="standard" 
