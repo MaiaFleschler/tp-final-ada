@@ -31,7 +31,7 @@ const Users: FC = () => {
                         <th scope="col">Lastname</th>
                         <th scope="col">Email</th>
                         <th scope="col">Birthdate</th>
-                        <th>Action</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
 				<tbody>
@@ -41,7 +41,7 @@ const Users: FC = () => {
                             <td>{user.lastName}</td>
                             <td>{user.email}</td>
                             <td>{user.birthdate}</td>
-                            <button onClick={() => handlingClick(`${user.id}`)}>{<DeleteTwoToneIcon />}</button>
+                            <td><button onClick={() => handlingClick(`${user.id}`)}>{<DeleteTwoToneIcon />}</button></td>
                         </tr>
                     ))}
 				</tbody>
