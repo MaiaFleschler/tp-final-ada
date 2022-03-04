@@ -7,7 +7,7 @@ import { dataBase } from "../../utils";
 
 
 const useAuth = () => {
-    const [tokenStorage, setTokenStorage] = useState<string | undefined>(
+    const [tokenStorage, setTokenStorage] = useState<string | undefined> (
         localStorage.getItem("user-token") || undefined
         );
     const { setUserSession } = useContext(AuthContext)
@@ -84,7 +84,7 @@ const useAuth = () => {
             const users: User[] = mapToArray(response.data);
     
             const user = users.find(
-                (user) => user.sessionToken === tokenStorage
+                (user) => user.sessionToken === tokenStorage && user.sessionToken
             );
     
             if(user) {
@@ -101,7 +101,8 @@ const useAuth = () => {
     };
 
     const logOut = () => {
-        localStorage.removeItem('share-job-token');
+        localStorage.removeItem('user-token');
+        setHasUserLoggedIn(false);
         setUserSession(undefined);
         push('/login');
     };

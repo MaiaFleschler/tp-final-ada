@@ -6,8 +6,7 @@ const useUsers = () => {
 
     const signUp = async (payload: Payload) => {
         try {
-            const response = await dataBase.post('/users.json', payload);
-            console.log(response);
+            await dataBase.post('/users.json', payload);
         } catch(err){
             console.log(err);
         }

@@ -4,8 +4,9 @@ import { useUsers } from '../../hooks';
 import { User } from '../../types';
 import './style.css'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import { WithAuth } from '../../hoc';
 
-const Users: FC = () => {
+const UsersPage: FC = () => {
 
     const { getUsers, removeUser } = useUsers();
     const [users, setUsers] = useState<User[]>();
@@ -51,4 +52,4 @@ const Users: FC = () => {
     )
 }
 
-export { Users }
+export const Users = WithAuth(UsersPage)
