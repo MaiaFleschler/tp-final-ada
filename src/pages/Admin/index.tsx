@@ -4,11 +4,12 @@ import { useHistory } from 'react-router-dom';
 import { ItemCard } from '../../components/common/Card';
 import { Searcher } from '../../components/common/Searcher';
 import { Layout } from '../../components/layout'
+import { WithAuth } from '../../hoc';
 import { useDataBase, useItems } from '../../hooks'
 import { MovieDBItem } from '../../types';
 import './style.css'
 
-const Admin: FC = () => {
+const AdminPage: FC = () => {
     
     const params = new URLSearchParams(window.location.search);
     let query = params.get("query");
@@ -65,4 +66,4 @@ const Admin: FC = () => {
     )
 }
 
-export {  Admin }
+export const Admin = WithAuth(AdminPage)

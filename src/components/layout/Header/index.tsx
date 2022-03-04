@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../../../hooks";
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,19 +12,32 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
-
-const pages = [
-    {name:'Home', path:'/'},
-    {name:'Movies', path:'movies'}, 
-    {name:'Series', path:'series'}, 
-    {name:'Users', path:'/users'}, 
-    {name:'Admin', path:'/admin?query=&page=1'}
-];
+import { AuthContext } from "../../../contexts";
+import { useContext, useState } from "react";
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  //Menu controlled by role
+  let pages;
+  const { userSession } = useContext(AuthContext);
+
+  if (userSession?.role === 'admin'){
+    pages = ( [
+      {name:'Home', path:'/'},
+      {name:'Movies', path:'movies'}, 
+      {name:'Series', path:'series'}, 
+      {name:'Users', path:'/users'}, 
+      {name:'Admin', path:'/admin?query=&page=1'}
+    ])
+  } if (userSession?.role === 'user') {
+    pages = ( [
+      {name:'Home', path:'/'},
+      {name:'Movies', path:'movies'}, 
+      {name:'Series', path:'series'}, 
+    ])
+  }
 
   const handleOpenNavMenu = (event:any) => {
     setAnchorElNav(event.currentTarget);
@@ -87,7 +99,7 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {pages?.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu} style={{ backgroundColor: '#A1C3D1' }}>
                   <Typography textAlign="center"><Link to={page.path} style={{ textDecoration: 'none', color: '#F0EBF4' }}>{page.name}</Link></Typography>
                 </MenuItem>
@@ -104,7 +116,7 @@ const Header = () => {
             CINEMADA
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages?.map((page) => (
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}

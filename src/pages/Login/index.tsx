@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Login as LoginForm } from '../../components/forms';
 import { Layout } from '../../components/layout';
+import { WithAuth } from '../../hoc';
 
-const Login: FC = () => {
+const LoginPage: FC = () => {
     return(
         <Layout hideHeader>
             <LoginForm />
@@ -10,4 +11,4 @@ const Login: FC = () => {
     )
 }
 
-export { Login }
+export const Login = WithAuth(LoginPage)

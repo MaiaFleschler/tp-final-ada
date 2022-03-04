@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from 'react'
 import { ItemCard } from '../../components/common/Card';
 import { Layout } from '../../components/layout'
+import { WithAuth } from '../../hoc';
 import { useDataBase } from '../../hooks';
 import { MovieDBItem } from '../../types';
 
 
 
-const Series: FC = () => {
+const SeriesPage: FC = () => {
     const { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem } = useDataBase();
 
     const { getDBSeries } = useDataBase();
@@ -39,4 +40,4 @@ const Series: FC = () => {
     )
 }
 
-export { Series }
+export const Series = WithAuth(SeriesPage)

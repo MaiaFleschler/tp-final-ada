@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import { SignUp as SignUpForm } from '../../components/forms'
 import { Layout } from '../../components/layout'
+import { WithAuth } from '../../hoc'
 
 
-const SignUp: FC = () => {
+const SignUpPage: FC = () => {
     return(
         <Layout hideHeader>
             <SignUpForm />
@@ -11,4 +12,4 @@ const SignUp: FC = () => {
     )
 }
 
-export {  SignUp }
+export const SignUp = WithAuth(SignUpPage)

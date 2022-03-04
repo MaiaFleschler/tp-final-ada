@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from 'react'
 import { ItemCard } from '../../components/common/Card';
 import { Layout } from '../../components/layout'
+import { WithAuth } from '../../hoc';
 import { useDataBase } from '../../hooks';
 import { MovieDBItem } from '../../types';
 
 
 
-const Home: FC = () => {
+const HomePage: FC = () => {
     const { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem } = useDataBase();
 
     const { getDBItems } = useDataBase();
@@ -39,4 +40,4 @@ const Home: FC = () => {
     )
 }
 
-export {  Home }
+export const Home = WithAuth(HomePage)
