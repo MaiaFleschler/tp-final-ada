@@ -6,8 +6,10 @@ import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { MovieDBItem } from '../../../types';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import './style.css'
+import { AuthContext } from '../../../contexts';
+import { useUsers } from '../../../hooks';
 
 type Props = {
   movieDBItem: MovieDBItem,
@@ -23,8 +25,12 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
   const [buttonText, setButtonText] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [image, setImage] = useState<string>();
+  const { userSession } = useContext(AuthContext);
+  const { setViewedItemsByUser, isViewed, RemoveViewedItemsByUser} = useUsers();
+
 
   const handlingClick = async () => {
+    if(userSession?.role==='admin') {
       if(!isIntoDB){
         await feedMovieDBItems(movieDBItem);
         getMovieDBItemsIds();
@@ -32,14 +38,33 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
         let item = movieDBItemsIds.find(e => e.apiID === movieDBItem.id)
         item && removeDBItem(item.dbId)
         getMovieDBItemsIds();
-        setButtonText('Add');
+        await setButtonText('Add');
+      }
+    } 
+    if(userSession && userSession?.role==='user') {
+      if(!(isViewed(userSession, movieDBItem.id))) {
+        movieDBItem.id && setViewedItemsByUser(userSession, movieDBItem.id)
+        setButtonText('Not Viewed')
+        isViewed(userSession, movieDBItem.id)
+      } 
+      else {
+        movieDBItem.id && RemoveViewedItemsByUser(userSession, movieDBItem.id);
+        setButtonText('Viewed')
       }
     }
+  }
     
   useEffect(()=>{
-    isIntoDB?setButtonText('Remove'):setButtonText('Add');
-  },[isIntoDB])
+    if(userSession?.role==='admin') {
+      isIntoDB?setButtonText('Remove'):setButtonText('Add');
+    }
+  },[isIntoDB]);
 
+  useEffect(()=>{
+    if(userSession?.role==='user') {
+      isViewed(userSession, movieDBItem.id)?setButtonText('Not Viewed'):setButtonText('Viewed');
+    }
+  },[])
 
   useEffect(()=>{
 

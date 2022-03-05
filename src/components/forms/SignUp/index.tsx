@@ -31,7 +31,7 @@ const SignUp: FC = () => {
     
     const onSubmit = async (data: { name: string; lastName: string; birthdate: string; email: string; password: string }) => {
         try{
-            await signUp({ name: data.name, lastName: data.lastName, birthdate: data.birthdate, email: data.email, password: data.password, role: 'user' })
+            await signUp({ name: data.name, lastName: data.lastName, birthdate: data.birthdate, email: data.email, password: data.password, role: 'user', viewed: [] })
             push("/login");
         } catch(err){
             console.log(err)
