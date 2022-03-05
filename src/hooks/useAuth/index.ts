@@ -48,7 +48,6 @@ const useAuth = () => {
   
             const users: User[] = mapToArray(response.data);
     
-    
             const user = users.find((user) => {
                 if(user.email === email && user.password === password) {
                     return user;
