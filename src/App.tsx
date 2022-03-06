@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts';
-import { SignUp, Login, Home, Admin, Movies, Series, Users } from './pages';
+import { SignUp, Login, Home, Admin, Movies, Series, Users, Details } from './pages';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -20,6 +20,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Switch>
+          <Route path='/details' component={Details} />
           <Route path='/admin' component={Admin} />
           <Route path='/movies' component={Movies} />
           <Route path='/series' component={Series} />

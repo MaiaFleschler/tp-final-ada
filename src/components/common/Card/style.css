@@ -5,6 +5,10 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 20px;
+    border: 1.5px solid transparent;
+}
+.card:hover {
+    border: 1.5px solid #B39BC8;
 }
 .cardContent {
     display: flex;
@@ -15,12 +19,15 @@
     color: #E64398;
     margin-top: 20px;
 }
+.cardAction:focus, .cardAction:hover, .cardAction:active, .cardAction:link {
+    color: transparent;
+}
 
 @media only screen and (min-width: 600px) {
     .card {
-        width: 23%;
-        margin-left: 11px;
-        margin-right: 11px;
+        width: 22%;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     .title {
         height: 85px;
