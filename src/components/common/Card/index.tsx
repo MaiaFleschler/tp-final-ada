@@ -10,6 +10,8 @@ import { FC, useContext, useEffect, useState } from 'react';
 import './style.css'
 import { AuthContext } from '../../../contexts';
 import { useUsers } from '../../../hooks';
+import { CardActionArea } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
   movieDBItem: MovieDBItem,
@@ -25,8 +27,10 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
   const [buttonText, setButtonText] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [image, setImage] = useState<string>();
+  const [href, setHref] = useState<string>('');
   const { userSession } = useContext(AuthContext);
   const { setViewedItemsByUser, isViewed, RemoveViewedItemsByUser} = useUsers();
+  const {location} = useHistory();
 
 
   const handlingClick = async () => {
@@ -46,8 +50,7 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
         movieDBItem.id && setViewedItemsByUser(userSession, movieDBItem.id)
         setButtonText('Not Viewed')
         isViewed(userSession, movieDBItem.id)
-      } 
-      else {
+      } else {
         movieDBItem.id && RemoveViewedItemsByUser(userSession, movieDBItem.id);
         setButtonText('Viewed')
       }
@@ -90,9 +93,13 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
     }
   },[movieDBItem])
 
+  useEffect(()=>{
+    location.pathname !== '/admin'?setHref(`/details?id=${movieDBItem.id}`):setHref('')
+  },[])
 
   return (
     <Card className='card' >
+      <CardActionArea href={href} className='cardAction'>
       <CardMedia
         component="img"
         image={image}
@@ -108,6 +115,7 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
         </Typography>
         <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
       </CardContent>
+      </CardActionArea>
       <CardActions>
         <Button variant="outlined" size="large" color="primary" onClick={handlingClick}>{buttonText}</Button>
       </CardActions>

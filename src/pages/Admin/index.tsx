@@ -36,7 +36,7 @@ const AdminPage: FC = () => {
             items = (response.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv")
             setMovieDBItems(items);
         });
-      }, [query, page, getItems]);
+      }, [query, page]);
       
       
       const handlePageChange = (event:any, value:any) => {

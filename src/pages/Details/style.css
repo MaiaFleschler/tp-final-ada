@@ -1,0 +1,29 @@
+.detailsCard {
+    margin: 15px;
+}
+.trailer {
+    margin-top: 10px;
+}
+.detailsVideos {
+    margin: 15px;
+}
+
+@media only screen and (min-width: 600px) {
+    .detailsCard {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .detailsImg {
+        width:30%;
+    }
+    .leftContainer {
+        width: 70%;
+    }
+    .detailsVideos {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .css-e6k82g-MuiCardMedia-root {
+        width: 400px !important;
+    }
+}

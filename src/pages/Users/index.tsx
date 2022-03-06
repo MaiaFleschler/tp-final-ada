@@ -15,10 +15,12 @@ const UsersPage: FC = () => {
         getUsers().then(response => {
             setUsers(response);
         });
-    }, [getUsers]);
+    }, []);
 
     const handlingClick = (id:string) => {
-        removeUser(id);
+        removeUser(id).then(response => {
+            setUsers(response);
+        });
     }
 
 
@@ -37,7 +39,7 @@ const UsersPage: FC = () => {
                 </thead>
 				<tbody>
                     {users?.map((user) => (
-                        <tr>
+                        <tr key={user.id}>
                             <td>{user.name}</td>
                             <td>{user.lastName}</td>
                             <td>{user.email}</td>

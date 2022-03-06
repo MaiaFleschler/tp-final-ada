@@ -8,9 +8,7 @@ import { MovieDBItem } from '../../types';
 
 
 const SeriesPage: FC = () => {
-    const { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem } = useDataBase();
-
-    const { getDBSeries } = useDataBase();
+    const { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem, getDBSeries } = useDataBase();
     const [dbSeries, setDbSeries] = useState<MovieDBItem[]>();
 
 

@@ -21,13 +21,13 @@ const useUsers = () => {
     const getUsers = async () => {
         try {
             const response = await dataBase.get('/users.json');
-            const array = [];
+            const usersArray = [];
             for (const elem in response.data) {
                 const user = response.data[elem];
                 user['id'] = elem;
-                array.push(user);
+                usersArray.push(user);
             }
-            return array;
+            return usersArray;
         } catch(err){
             console.log(err);
         }
@@ -36,6 +36,8 @@ const useUsers = () => {
     const removeUser = async (id:string) => {
         try {
             await dataBase.delete(`/users/${id}.json`);
+            const users = await getUsers();
+            return users;
         } catch(err){
             console.log(err);
         }

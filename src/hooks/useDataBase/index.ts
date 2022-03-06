@@ -80,6 +80,22 @@ const useDataBase = () => {
         }
     }
 
-    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem, getDBItems, getDBMovies, getDBSeries }
+    const getDBItem = async (id:number) => {
+        try {
+            const response = await dataBase.get('/movie_db_items.json');
+            let item;
+            for (const elem in response.data) {
+                if(response.data[elem].id === id) {
+                    item = response.data[elem]
+                    console.log(item)
+                }
+            }
+            return item;
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    return { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem, getDBItems, getDBMovies, getDBSeries, getDBItem }
 }
 export { useDataBase }
