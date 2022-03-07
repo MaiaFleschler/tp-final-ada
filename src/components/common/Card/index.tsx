@@ -14,6 +14,7 @@ import { CardActionArea } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 type Props = {
+  hideButton?: boolean,
   movieDBItem: MovieDBItem,
   feedMovieDBItems: (movie:MovieDBItem)=>void,
   getMovieDBItemsIds: ()=>void,
@@ -22,7 +23,7 @@ type Props = {
   movieDBItemsIds: { apiID: number; dbId: string; }[]
 }
 
-const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsIds, isIntoDB, removeDBItem, movieDBItemsIds }) => {
+const ItemCard : FC<Props> = ({ hideButton, movieDBItem, feedMovieDBItems, getMovieDBItemsIds, isIntoDB, removeDBItem, movieDBItemsIds }) => {
 
   const [buttonText, setButtonText] = useState<string>();
   const [title, setTitle] = useState<string>();
@@ -98,13 +99,14 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
   },[])
 
   return (
-    <Card className='card' >
+    <Card className={(location.pathname==='/details')?'cardSmall':'card'} >
       <CardActionArea href={href} className='cardAction'>
       <CardMedia
         component="img"
         image={image}
         alt="Poster"
-        className='cardImg'
+        className={(location.pathname==='/details')?'cardImgSmall':'cardImg'}
+        
       />
       <CardContent className='cardContent'>
         <Typography gutterBottom variant="h6" component="div" className='title'>
@@ -116,9 +118,9 @@ const ItemCard : FC<Props> = ({ movieDBItem, feedMovieDBItems, getMovieDBItemsId
         <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
       </CardContent>
       </CardActionArea>
-      <CardActions>
+      { !hideButton && <CardActions>
         <Button variant="outlined" size="large" color="primary" onClick={handlingClick}>{buttonText}</Button>
-      </CardActions>
+      </CardActions>}
     </Card>
   );
 }

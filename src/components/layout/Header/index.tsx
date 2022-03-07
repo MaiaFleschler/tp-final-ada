@@ -53,6 +53,9 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleLogOut = () => {
+    logOut()
+  };
 
   const { logOut } = useAuth();
 
@@ -150,8 +153,8 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem key={'Logout'} onClick={handleCloseUserMenu}>
-                  <button onClick={logOut}>Log out</button>
+                <MenuItem key={'Logout'} onClick={handleLogOut} style={{ color: '#E64398' }}>
+                  LOG OUT
                 </MenuItem>   
             </Menu>
           </Box>

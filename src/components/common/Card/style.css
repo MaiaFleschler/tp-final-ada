@@ -1,4 +1,4 @@
-.card {
+.card, .cardSmall {
     width: 300px;
     margin-top: 20px;
     display: flex;
@@ -22,11 +22,21 @@
 .cardAction:focus, .cardAction:hover, .cardAction:active, .cardAction:link {
     color: transparent;
 }
+.alsoTitle {
+    color: #E64398;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+}
 
 @media only screen and (min-width: 600px) {
     .card {
         width: 22%;
-        margin-left: 10px;
+        margin-left: 16px;
+        margin-right: 10px;
+    }
+    .cardSmall {
+        width: 14%;
+        margin-left: 16px;
         margin-right: 10px;
     }
     .title {
@@ -34,5 +44,8 @@
     }
     .cardImg {
         height: 400px;
+    }
+    .cardImgSmall {
+        height: 200px;
     }
 }
