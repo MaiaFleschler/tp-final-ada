@@ -10,6 +10,7 @@ import { useDataBase, useItems } from '../../hooks';
 import { MovieDBItem } from '../../types';
 import Rating from '@mui/material/Rating';
 import { AlsoCards } from '../../components/common/AlsoCards';
+import CircularProgress from '@mui/material/CircularProgress';
 import './style.css'
 
 
@@ -64,46 +65,51 @@ const DetailsPage: FC = () => {
 
     return(
         <Layout>
-            <Card className='detailsCard'>
-                <Box className='detailsImg'>
-                    <CardMedia 
-                        component="img"
-                        image={image}
-                        alt="Poster"
-                    />
-                </Box>
-                <Box className='leftContainer'>
-                    <Box className='detailsCardContent' marginTop={3}>
-                        <CardContent>
-                            <Typography component="div" variant="h5" color="primary">
-                                {title}
-                            </Typography>
-                            <Rating name="half-rating-read" value={voteAverage/2} precision={0.5} readOnly />
-                            <Typography variant="subtitle1" color="text.secondary" component="div">
-                                {dbItem?.overview}
-                            </Typography>
-                            <Typography variant="subtitle1" marginTop={2}>
-                                {(mediaType==='movie')?
-                                `Release date: ${dbItem?.release_date}`:
-                                `First air date: ${dbItem?.first_air_date}`}
-                            </Typography>
-                        </CardContent>
+            {dbItem?(
+            <>
+                <Card className='detailsCard'>
+                    <Box className='detailsImg'>
+                        <CardMedia 
+                            component="img"
+                            image={image}
+                            alt="Poster"
+                        />
                     </Box>
-                    <Typography component="div" variant="h5" color="secondary" marginLeft={2}>
-                        Trailers
-                    </Typography>
-                    <Box className='detailsVideos'>
-                        {videos?.map((video) => (
-                            <CardMedia className='trailer'
-                                key={video}
-                                component="iframe"
-                                image={`https://www.youtube.com/embed/${video}`}
-                            />
-                        ))}
+                    <Box className='leftContainer'>
+                        <Box className='detailsCardContent' marginTop={3}>
+                            <CardContent>
+                                <Typography component="div" variant="h5" color="primary">
+                                    {title}
+                                </Typography>
+                                <Rating name="half-rating-read" value={voteAverage/2} precision={0.5} readOnly />
+                                <Typography variant="subtitle1" color="text.secondary" component="div">
+                                    {dbItem?.overview}
+                                </Typography>
+                                <Typography variant="subtitle1" marginTop={2}>
+                                    {(mediaType==='movie')?
+                                    `Release date: ${dbItem?.release_date}`:
+                                    `First air date: ${dbItem?.first_air_date}`}
+                                </Typography>
+                            </CardContent>
+                        </Box>
+                        <Typography component="div" variant="h5" color="secondary" marginLeft={2}>
+                            Trailers
+                        </Typography>
+                        <Box className='detailsVideos'>
+                            {videos?.map((video) => (
+                                <CardMedia className='trailer'
+                                    key={video}
+                                    component="iframe"
+                                    image={`https://www.youtube.com/embed/${video}`}
+                                />
+                            ))}
+                        </Box>
                     </Box>
-                </Box>
-            </Card>
-            <AlsoCards />
+                </Card>
+                <AlsoCards />
+            </>
+            ):
+            <CircularProgress color="secondary" />}
         </Layout>
     )
 }
