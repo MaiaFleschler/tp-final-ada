@@ -17,10 +17,9 @@ const UsersPage: FC = () => {
         });
     }, []);
 
-    const handlingClick = (id:string) => {
-        removeUser(id).then(response => {
-            setUsers(response);
-        });
+    const handlingClick = async (id:string) => {
+        const response = await removeUser(id);
+        setUsers(response);
     }
 
 

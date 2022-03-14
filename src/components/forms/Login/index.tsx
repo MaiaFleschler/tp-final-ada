@@ -56,7 +56,6 @@ const Login: FC = () => {
             </div>
             <div>{error}</div>
             <button type="submit" className="submit">Login</button>
-            {alert}
         </form>
         <Link to='signUp' className="signUp-login">Sign up</Link><br />
         </div>

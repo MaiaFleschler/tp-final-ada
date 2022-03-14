@@ -4,6 +4,7 @@ import { validationSchema } from "./validation-schema";
 import { FC } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useUsers } from "../../../hooks";
+import { SignupPayload } from "./types";
 
 const defaultValues = {
     name: '',
@@ -23,15 +24,15 @@ const SignUp: FC = () => {
         register,
         formState: { errors }, 
         handleSubmit,
-     } = useForm<{ name: string; lastName: string; birthdate: string; email: string; password: string }>({
+     } = useForm<SignupPayload>({
         resolver: yupResolver(validationSchema),
         defaultValues,
     })
 
     
-    const onSubmit = async (data: { name: string; lastName: string; birthdate: string; email: string; password: string }) => {
+    const onSubmit = async (data:SignupPayload) => {
         try{
-            await signUp({ name: data.name, lastName: data.lastName, birthdate: data.birthdate, email: data.email, password: data.password, role: 'user', viewed: [] })
+            await signUp({ ...data, role: 'user', viewed: [] })
             push("/login");
         } catch(err){
             console.log(err)

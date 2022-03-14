@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography';
 import { useDataBase, useItems } from '../../hooks';
 import { MovieDBItem } from '../../types';
 import Rating from '@mui/material/Rating';
-import './style.css'
-import { Home } from '../Home';
 import { AlsoCards } from '../../components/common/AlsoCards';
+import './style.css'
+
 
 
 

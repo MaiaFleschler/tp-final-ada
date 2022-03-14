@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import { useHistory } from 'react-router-dom';
 import './style.css'
-import { queryAllByAltText } from '@testing-library/react';
 
 const Searcher = () => {
 

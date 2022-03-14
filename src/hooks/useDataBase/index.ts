@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MovieDBItem, User } from "../../types";
+import { MovieDBItem } from "../../types";
 import { dataBase } from "../../utils";
 
 const useDataBase = () => {
@@ -87,7 +87,6 @@ const useDataBase = () => {
             for (const elem in response.data) {
                 if(response.data[elem].id === id) {
                     item = response.data[elem]
-                    console.log(item)
                 }
             }
             return item;
