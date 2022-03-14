@@ -20,20 +20,20 @@ const AdminPage: FC = () => {
 
     const { feedMovieDBItems, getMovieDBItemsIds, movieDBItemsIds, removeDBItem } = useDataBase();
     const { getItems } = useItems();
+    const { push } = useHistory();
 
-    const { push } = useHistory()
     useEffect(() => {
         push(`/admin?query=${query==null?query="":query}&page=${page}`)
       }, [page]);
 
     useEffect(() => {
-            getItems().then(response => {
+        getItems().then(response => {
             setTotalPages(response.total_pages);
             //Filter not showing people from multi/search
             let items;
             query==="" || query===undefined?
-            items = response.results:
-            items = (response.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv")
+              items = response.results:
+              items = (response.results).filter((element:MovieDBItem) => element.media_type === "movie" || element.media_type === "tv")
             setMovieDBItems(items);
         });
       }, [query, page]);
@@ -47,19 +47,19 @@ const AdminPage: FC = () => {
         <Layout>
             <Searcher />
             <div className='cardsContainer'>
-            {movieDBItems?.map((movieDBItem) => (
-                <ItemCard
-                    movieDBItem = {movieDBItem}
-                    key={movieDBItem.id}
-                    feedMovieDBItems={feedMovieDBItems}
-                    getMovieDBItemsIds={getMovieDBItemsIds}
-                    isIntoDB={
-                      movieDBItemsIds.some(e => e.apiID === movieDBItem.id)
-                    }
-                    removeDBItem={removeDBItem}
-                    movieDBItemsIds={movieDBItemsIds}
-                />
-            ))}
+              {movieDBItems?.map((movieDBItem) => (
+                  <ItemCard
+                      movieDBItem = {movieDBItem}
+                      key={movieDBItem.id}
+                      feedMovieDBItems={feedMovieDBItems}
+                      getMovieDBItemsIds={getMovieDBItemsIds}
+                      isIntoDB={
+                        movieDBItemsIds.some(e => e.apiID === movieDBItem.id)
+                      }
+                      removeDBItem={removeDBItem}
+                      movieDBItemsIds={movieDBItemsIds}
+                  />
+              ))}
             </div>
             <Pagination count={totalPages} page={Number(params.get("page"))} onChange={handlePageChange} variant="outlined" defaultPage={1} boundaryCount={0} showFirstButton showLastButton className='pagination' color='primary'/>
         </Layout>

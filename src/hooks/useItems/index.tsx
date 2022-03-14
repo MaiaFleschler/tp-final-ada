@@ -7,6 +7,7 @@ const useItems = () => {
         const params = new URLSearchParams(window.location.search);
         let query = params.get("query");
         let page = params.get("page");
+        
         let response;
         if(query=="" || query==undefined){
             response = await api.get(`/movie/top_rated?page=${page}`);

@@ -42,52 +42,52 @@ const SignUp: FC = () => {
 
     return(
         <>
-        <div className="formContainer">
-        <div className="signUpFormContainer">
-        <p className="formTitle">SignUp</p>
-        <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <input type="text" className="inputForm" placeholder="Name"
-                {...register('name')}
-                />
-                {errors.name?.message}
-                
+            <div className="formContainer">
+                <div className="signUpFormContainer">
+                    <p className="formTitle">SignUp</p>
+                    <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
+                        <div>
+                            <input type="text" className="inputForm" placeholder="Name"
+                            {...register('name')}
+                            />
+                            {errors.name?.message}
+                            
+                        </div>
+                        <div>
+                            <input type="text" className="inputForm" placeholder="Lastname"
+                            {...register('lastName')}
+                            />
+                            {errors.lastName?.message}
+                            
+                        </div>
+                        <div>
+                            <input type="text" className="inputForm" placeholder="Email"
+                            {...register('email')}
+                            />
+                            {errors.email?.message}
+                            
+                        </div>
+                        <div>
+                            <input type="password" className="inputForm" placeholder="Password"
+                            {...register('password')}
+                            />
+                            {errors.password?.message}
+                        </div>
+                        <div>
+                            <input type="date" className="inputBirthdate" placeholder="Before"
+                            {...register('birthdate')}
+                            />
+                            
+                            {errors.birthdate?.message}
+                            
+                        </div>
+                        <button type="submit" className="submit">Sign Up</button>
+                        {alert}
+                    </form>
+                    <Link to='login' className="signUp-login">Login</Link><br />
+                </div>
             </div>
-            <div>
-                <input type="text" className="inputForm" placeholder="Lastname"
-                {...register('lastName')}
-                />
-                {errors.lastName?.message}
-                
-            </div>
-            <div>
-                <input type="text" className="inputForm" placeholder="Email"
-                {...register('email')}
-                />
-                {errors.email?.message}
-                
-            </div>
-            <div>
-                <input type="password" className="inputForm" placeholder="Password"
-                {...register('password')}
-                />
-                {errors.password?.message}
-            </div>
-            <div>
-                <input type="date" className="inputBirthdate" placeholder="Before"
-                {...register('birthdate')}
-                />
-                
-                {errors.birthdate?.message}
-                
-            </div>
-            <button type="submit" className="submit">Sign Up</button>
-            {alert}
-        </form>
-        <Link to='login' className="signUp-login">Login</Link><br />
-        </div>
-        </div>
-    </>
+        </>
     )
 }
 

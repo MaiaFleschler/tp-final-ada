@@ -22,17 +22,17 @@ const SeriesPage: FC = () => {
     return(
         <Layout>
             <div className='cardsContainer'>
-            {dbSeries?.map((dbSerie:MovieDBItem) => (
-                <ItemCard
-                    movieDBItem={dbSerie}
-                    key={dbSerie.id} 
-                    feedMovieDBItems={feedMovieDBItems}
-                    getMovieDBItemsIds={getMovieDBItemsIds}
-                    isIntoDB={true}
-                    removeDBItem={removeDBItem}
-                    movieDBItemsIds={movieDBItemsIds}
-                />
-            ))}
+                {dbSeries?.map((dbSerie:MovieDBItem) => (
+                    <ItemCard
+                        movieDBItem={dbSerie}
+                        key={dbSerie.id} 
+                        feedMovieDBItems={feedMovieDBItems}
+                        getMovieDBItemsIds={getMovieDBItemsIds}
+                        isIntoDB={true}
+                        removeDBItem={removeDBItem}
+                        movieDBItemsIds={movieDBItemsIds}
+                    />
+                ))}
             </div>
         </Layout>
     )

@@ -104,6 +104,12 @@
     width: 90%;
 }
 
+.adminInfo{
+    font-family: 'Ubuntu', sans-serif;
+    color: #E64398;
+    text-align: center;
+}
+
 @media (min-width: 600px) {
     .loginFormContainer {
         width: 400px;

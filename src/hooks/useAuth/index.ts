@@ -8,10 +8,10 @@ import { dataBase } from "../../utils";
 
 const useAuth = () => {
     const [tokenStorage, setTokenStorage] = useState<string | undefined> (
-        localStorage.getItem("user-token") || undefined
+            localStorage.getItem("user-token") || undefined
         );
-    const { setUserSession } = useContext(AuthContext)
 
+    const { setUserSession } = useContext(AuthContext)
 
     const [hasUserLoggedIn, setHasUserLoggedIn] = useState<boolean>();
 
@@ -96,7 +96,6 @@ const useAuth = () => {
         } catch(err){
             console.log(err);
         }
-
     };
 
     const logOut = () => {

@@ -101,22 +101,22 @@ const ItemCard : FC<Props> = ({ hideButton, movieDBItem, feedMovieDBItems, getMo
   return (
     <Card className={(location.pathname==='/details')?'cardSmall':'card'} >
       <CardActionArea href={href} className='cardAction'>
-      <CardMedia
-        component="img"
-        image={image}
-        alt="Poster"
-        className={(location.pathname==='/details')?'cardImgSmall':'cardImg'}
-        
-      />
-      <CardContent className='cardContent'>
-        <Typography gutterBottom variant="h6" component="div" className='title'>
-          {title}
-        </Typography>
-        <Typography variant="h6" color="#B39BC8">
-          {movieDBItem.vote_average}
-        </Typography>
-        <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
-      </CardContent>
+        <CardMedia
+          component="img"
+          image={image}
+          alt="Poster"
+          className={(location.pathname==='/details')?'cardImgSmall':'cardImg'}
+          
+        />
+        <CardContent className='cardContent'>
+          <Typography gutterBottom variant="h6" component="div" className='title'>
+            {title}
+          </Typography>
+          <Typography variant="h6" color="#B39BC8">
+            {movieDBItem.vote_average}
+          </Typography>
+          <Rating name="half-rating-read" value={movieDBItem.vote_average/2} precision={0.5} readOnly />
+        </CardContent>
       </CardActionArea>
       { !hideButton && <CardActions>
         <Button variant="outlined" size="large" color="primary" onClick={handlingClick}>{buttonText}</Button>

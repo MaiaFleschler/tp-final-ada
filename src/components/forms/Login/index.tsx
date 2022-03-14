@@ -13,10 +13,8 @@ export const defaultValues = {
 
 const Login: FC = () => {
 
-
     const { login } = useAuth();
     const [error, setError] = useState('');
-
 
     const {
         register,
@@ -37,29 +35,30 @@ const Login: FC = () => {
 
     return(
         <>
-        <div className="formContainer">
-        <div className="loginFormContainer">
-        <p className="formTitle">Login</p>
-        <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <input type="text" className="inputForm" placeholder="Email"
-                {...register('email')}
-                />
-                {errors.email?.message}
-                
+            <div className="formContainer">
+                <div className="loginFormContainer">
+                    <p className="formTitle">Login</p>
+                    <form action="" className="userForm" onSubmit={handleSubmit(onSubmit)}>
+                        <div>
+                            <input type="text" className="inputForm" placeholder="Email"
+                            {...register('email')}
+                            />
+                            {errors.email?.message}
+                            
+                        </div>
+                        <div>
+                            <input type="password" className="inputForm" placeholder="Password"
+                            {...register('password')}
+                            />
+                            {errors.password?.message}
+                        </div>
+                        <div>{error}</div>
+                        <button type="submit" className="submit">Login</button>
+                    </form>
+                    <Link to='signUp' className="signUp-login">Sign up</Link><br />
+                </div>
+                <p className='adminInfo'>To login as administrator: admin@admin.com Pass:123456</p>
             </div>
-            <div>
-                <input type="password" className="inputForm" placeholder="Password"
-                {...register('password')}
-                />
-                {errors.password?.message}
-            </div>
-            <div>{error}</div>
-            <button type="submit" className="submit">Login</button>
-        </form>
-        <Link to='signUp' className="signUp-login">Sign up</Link><br />
-        </div>
-        </div>
         </>
     )
 

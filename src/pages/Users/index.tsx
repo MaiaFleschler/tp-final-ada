@@ -26,28 +26,28 @@ const UsersPage: FC = () => {
     return(
         <Layout>
             <div className="usersTableContainer">
-            <table className="usersTable">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Lastname</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Birthdate</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-				<tbody>
-                    {users?.map((user) => (
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.email}</td>
-                            <td>{user.birthdate}</td>
-                            <td><button onClick={() => handlingClick(`${user.id}`)}>{<DeleteTwoToneIcon />}</button></td>
+                <table className="usersTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Lastname</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Birthdate</th>
+                            <th scope="col">Action</th>
                         </tr>
-                    ))}
-				</tbody>
-			</table>
+                    </thead>
+                    <tbody>
+                        {users?.map((user) => (
+                            <tr key={user.id}>
+                                <td>{user.name}</td>
+                                <td>{user.lastName}</td>
+                                <td>{user.email}</td>
+                                <td>{user.birthdate}</td>
+                                <td><button onClick={() => handlingClick(`${user.id}`)}>{<DeleteTwoToneIcon />}</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </Layout>
     )

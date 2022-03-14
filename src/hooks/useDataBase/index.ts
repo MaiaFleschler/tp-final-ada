@@ -20,8 +20,9 @@ const useDataBase = () => {
         try {
             const response = await dataBase.get('/movie_db_items.json');
             Object.keys(response.data).map(key =>
-                movieDBItemsIdsArray.push({apiID: response.data[key].id, dbId: key} ))
-                setMovieDBItemsIds(movieDBItemsIdsArray);
+                movieDBItemsIdsArray.push({apiID: response.data[key].id, dbId: key})
+            );
+            setMovieDBItemsIds(movieDBItemsIdsArray);
         } catch(err){
             console.log(err);
         }
